@@ -15,7 +15,22 @@
     h1 { margin: 12px 16px; font-size: 18px; }
     /* Make the viz container fill the page (minus the heading) */
     #bar_chart { width: 100vw; height: calc(100vh - 56px); }
-  </style>
+   </style>
+
+   <style>
+  html, body { height: 100%; margin: 0; }
+
+  /* Larger, responsive heading */
+  h1 {
+    margin: 16px;
+    font-size: 36px;
+    line-height: 1.15;
+    font-weight: 700;
+  }
+
+  /* Make the viz container fill the rest of the page */
+  #world_map { width: 100vw; height: calc(100vh - 80px); }
+</style>
 
     <script src="vega_lite_vis.js"></script>
 
@@ -24,9 +39,12 @@
 </head>
 
 <body>
-    <h1>First Vega-Lite graph</h1>
+    <h1>Crime Rates Around the World</h1>
     <div id="world_map">
     </div>
+    <br>
+    <br>
+    <footer> Chris Maior FIT3179 S2 2025 - HW Week 9</footer>
 </body>
 
 </html>
