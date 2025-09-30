@@ -35,7 +35,7 @@
         {
           "lookup": "properties.ISO_A2",
           "from": {
-            "data": { "url": "crime-rate-by-country-2025.csv" },
+            "data": { "url": "data/crime-rate-by-country-2025.csv" },
             "key": "flagCode",
             "fields": ["NumbeoCrimeIndex_2024", "country"]
           }
