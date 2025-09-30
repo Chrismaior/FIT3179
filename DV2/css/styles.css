@@ -1,0 +1,95 @@
+/* ---------- Theme ---------- */
+:root{
+  /* you can tweak this one hex to make it lighter/darker */
+  --ink:#344460;            /* lighter, clean slate/navy */
+  --panel:#1f2940cc;
+  --panel-border:#ffffff22;
+  --text:#e8edf5;
+  --muted:#a8b3c7;
+  --accent:#eab308;
+  --danger:#ef4444;
+}
+
+body{
+  margin:0;
+  color:var(--text);
+  font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+
+  /* single-colour background */
+  background: var(--ink);
+}
+
+.container{
+  max-width:1250px;
+  margin:0 auto;
+  padding:0 18px 48px;
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  max-width:1200px;
+  margin:28px auto 18px;
+  padding:22px 24px 16px;
+  background:linear-gradient(180deg,#ffffff6b,#ffffff2b);
+  border:1px solid var(--panel-border);
+  border-radius:20px;
+  box-shadow:0 10px 30px #0006, inset 0 1px 0 #ffffff1c;
+}
+.hero .eyebrow{
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  color:var(--accent);
+  font-weight:800;
+  font-size:.78rem;
+  margin-bottom:6px;
+}
+.hero h1{
+  margin:0;
+  font-weight:900;
+  letter-spacing:.5px;
+  font-size:clamp(28px,6vw,56px);
+}
+
+/* fun “crime tape” accent */
+.tape{
+  height:14px;
+  margin-top:14px;
+  border-radius:8px;
+  background-image:
+    repeating-linear-gradient(135deg, var(--accent) 0 26px, #111 26px 38px);
+  box-shadow:0 8px 18px #0008;
+
+}
+
+/* ---------- Cards ---------- */
+.card{
+  background:var(--panel);
+  border:1px solid var(--panel-border);
+  border-radius:18px;
+  box-shadow:0 16px 40px rgba(0, 0, 0, 0.042);
+  overflow:hidden;
+}
+.card-header{
+  display:flex; align-items:baseline; justify-content:space-between;
+  padding:16px 18px 0;
+}
+.card-title{font-weight:800; font-size:1.15rem; color:#e2e8f0}
+.card-subtitle{font-size:.9rem; color:var(--muted)}
+
+.map-card{ padding:8px 10px 16px; }
+
+/* Vega container size */
+#world_map{ width: 150%; 
+    height:min(74vh, 500px);
+    margin: 0 auto;
+ }
+
+
+/* Footer */
+footer{ text-align:center; color:var(--muted); padding:28px 0; }
+
+/* Responsive tweak */
+@media (max-width:720px){
+  .card-title{font-size:1rem}
+  #world_map{height:60vh}
+}
