@@ -76,13 +76,23 @@ body{
 .card-title{font-weight:800; font-size:1.15rem; color:#e2e8f0}
 .card-subtitle{font-size:.9rem; color:var(--muted)}
 
-.map-card{ padding:8px 10px 16px; }
+.map-card{ padding:8px 10px 16px; } 
 
 /* Vega container size */
-#world_map{ width: 150%; 
-    height:min(74vh, 500px);
+#world_map{ width: 100%; 
+
     margin: 0 auto;
+    padding-left: 100px;
  }
+ .legend-caption{
+  max-width: 960px;          /* match the map width */
+  margin: 5px 95px;        /* centered, just below the chart */
+  padding: 10px;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: white;
+}
+
 
 
 /* Footer */
