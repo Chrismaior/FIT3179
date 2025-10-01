@@ -1,0 +1,112 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Treemap of World Crime by Region → SubRegion → CrimeCategory",
+  "width": 960,
+  "height": 500,
+  "padding": 2.5,
+  "autosize": "none",
+
+  "signals": [
+    {
+      "name": "layout", "value": "squarify",
+      "bind": { "input": "select", "options": ["squarify", "binary", "slicedice"] }
+    },
+    {
+      "name": "aspectRatio", "value": 1.6,
+      "bind": { "input": "range", "min": 1, "max": 5, "step": 0.1 }
+    }
+  ],
+
+  "data": [
+    {
+      "name": "table",
+      "url": "data/TreeMap_FINAL1.csv",
+      "format": { "type": "csv" },
+      "transform": [
+        { "type": "formula", "as": "Region2",       "expr": "trim(datum.Region)" },
+        { "type": "formula", "as": "SubRegion2",    "expr": "trim(datum.Subregion)" },
+        { "type": "formula", "as": "CrimeCategory2","expr": "trim(datum.Category)" },
+        { "type": "formula", "as": "ValueNum", "expr": "toNumber(replace(datum.VALUE, ',', ''))" },
+        { "type": "filter", "expr": "isFinite(datum.ValueNum) && datum.ValueNum > 0" }
+      ]
+    },
+    {
+      "name": "tree",
+      "source": "table",
+      "transform": [
+        { "type": "nest", "keys": ["Region2","SubRegion2","CrimeCategory2"] },
+        {
+          "type": "treemap",
+          "field": "value",
+          "method": { "signal": "layout" },
+          "ratio": { "signal": "aspectRatio" },
+          "size": [{"signal":"width"},{"signal":"height"}],
+          "round": true,
+          "paddingInner": 1,
+          "paddingOuter": 0
+        }
+      ]
+    },
+    { "name": "nodes",  "source": "tree", "transform": [ { "type": "filter", "expr": "datum.children" } ] },
+    { "name": "leaves", "source": "tree", "transform": [ { "type": "filter", "expr": "!datum.children" } ] }
+  ],
+
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": { "data": "nodes", "field": "key" },
+      "range": { "scheme": "category10" }
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": { "data": "nodes" },
+      "encode": {
+        "enter": { "fill": { "scale": "color", "field": "key" } },
+        "update": {
+          "x": {"field":"x0"}, "y": {"field":"y0"},
+          "x2":{"field":"x1"}, "y2":{"field":"y1"}
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": { "data": "leaves" },
+      "encode": {
+        "enter": {
+          "stroke": {"value":"#fff"},
+          "tooltip": {
+            "signal": "{'Region': (datum.ancestors.length>1?datum.ancestors[1].data.key:''), 'Subregion': (datum.ancestors.length>2?datum.ancestors[2].data.key:''), 'Category': datum.data.key, 'VALUE': datum.value}"
+          }
+        },
+        "update": {
+          "x": {"field":"x0"}, "y": {"field":"y0"},
+          "x2":{"field":"x1"}, "y2":{"field":"y1"},
+          "fill": {"value":"transparent"}
+        },
+        "hover": { "fill": {"value":"rgba(255,255,255,0.08)"} }
+      }
+    },
+    {
+      "type": "text",
+      "from": { "data": "leaves" },
+      "encode": {
+        "enter": {
+          "fontSize": {"value": 12},
+          "fill": {"value": "#111"},
+          "align": {"value": "left"},
+          "baseline": {"value": "top"},
+          "dx": {"value": 3}, "dy": {"value": 3},
+          "text": {"signal": "datum.data.key"}
+        },
+        "update": {
+          "x": {"field":"x0"}, "y": {"field":"y0"},
+          "opacity": {"signal":"((datum.x1-datum.x0)*(datum.y1-datum.y0))>2500?1:0"}
+        }
+      }
+    }
+  ]
+}

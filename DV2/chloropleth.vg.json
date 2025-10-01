@@ -2,8 +2,9 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": "transparent",
   "title": { "text": "Crime Rate by Country 2025", "color": "#ffffff" },
-  "width": 1000,
-  "height": 460,
+  "autosize": { "type": "fit", "contains": "padding" },
+  "width": "container",
+  "height": 750,
   "projection": { "type": "naturalEarth1" },
 
   "layer": [

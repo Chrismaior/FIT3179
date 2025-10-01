@@ -13,21 +13,21 @@
 body{
   margin:0;
   color:var(--text);
-  font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  font:20px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
 
   /* single-colour background */
   background: var(--ink);
 }
 
 .container{
-  max-width:1250px;
+  max-width:1700px;
   margin:0 auto;
   padding:0 18px 48px;
 }
 
 /* ---------- Hero ---------- */
 .hero{
-  max-width:1200px;
+  max-width:1650px;
   margin:28px auto 18px;
   padding:22px 24px 16px;
   background:linear-gradient(180deg,#ffffff6b,#ffffff2b);
@@ -73,33 +73,52 @@ body{
   display:flex; align-items:baseline; justify-content:space-between;
   padding:16px 18px 0;
 }
-.card-title{font-weight:800; font-size:1.15rem; color:#e2e8f0}
+.card-title{font-weight:800; font-size:2.5rem; color:#e2e8f0}
 .card-subtitle{font-size:.9rem; color:var(--muted)}
 
 .map-card{ padding:8px 10px 16px; } 
 
 /* Vega container size */
-#world_map{ width: 100%; 
+#world_map {
+  width: 100%;      /* take the full width of the parent card */
+  height: 600px;    /* adjust height so it’s taller */
+  padding-left: 90px;
+}
 
-    margin: 0 auto;
-    padding-left: 100px;
- }
- .legend-caption{
-  max-width: 960px;          /* match the map width */
+ 
+ .caption{
+  max-width: 1300px;          /* match the map width */
   margin: 5px 95px;        /* centered, just below the chart */
-  padding: 10px;
-  font-size: 1rem;
+  padding-left: 1px;
+  font-size: 23px;
   line-height: 1.45;
   color: white;
 }
 
+.section_break{
+  margin-bottom: 18px;
+}
+
+.flourish-embed {
+  width: 100%;         /* makes it adapt to container */
+  max-width: 900px;    /* keep it smaller than full screen */
+  margin: 30px auto;   /* spacing between sections */
+  border-radius: 12px; /* rounded corners */
+  background: transparent !important; /* force no background */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25); /* optional shadow */
+}
+
+.flourish-embed iframe {
+  background: transparent !important; 
+  width: 100% !important;
+}
 
 
 /* Footer */
 footer{ text-align:center; color:var(--muted); padding:28px 0; }
 
 /* Responsive tweak */
-@media (max-width:720px){
+@media (max-width:1000px){
   .card-title{font-size:1rem}
   #world_map{height:60vh}
 }
