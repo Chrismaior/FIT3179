@@ -1,0 +1,49 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Value over Time — Country vs Region",
+  "width": 800,
+  "height": 420,
+  "data": { "url": "data/homicide_total_rate_and_count.csv" },
+
+  "params": [
+    {
+      "name": "countrySel",
+      "value": null,
+      "bind": {
+        "input": "select",
+        "name": "Territory (Country): ",
+        "options": [null, "Australia", "United States", "India", "Brazil", "South Africa"]
+      }
+    },
+    {
+      "name": "regionSel",
+      "value": null,
+      "bind": {
+        "input": "select",
+        "name": "Region (Continent): ",
+        "options": [null, "Europe", "Asia", "Africa", "Americas", "Oceania"]
+      }
+    }
+  ],
+
+  "layer": [
+    {
+      "transform": [{ "filter": "countrySel != null && datum.Country == countrySel" }],
+      "mark": { "type": "line", "strokeWidth": 2.5, "color": "#2563eb" },
+      "encoding": {
+        "x": { "field": "Year", "type": "temporal" },
+        "y": { "field": "Value", "type": "quantitative" },
+        "tooltip": ["Country", "Year", "Value"]
+      }
+    },
+    {
+
+      "mark": { "type": "line", "strokeWidth": 2.5, "strokeDash": [6, 4], "color": "#ef4444" },
+      "encoding": {
+        "x": { "field": "Year", "type": "temporal" },
+        "y": { "field": "Value", "type": "quantitative" },
+        "tooltip": ["Region", "Year", { "field": "Value", "title": "Mean Value" }]
+      }
+    }
+  ]
+}
