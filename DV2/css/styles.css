@@ -78,6 +78,19 @@ body{
 
 .map-card{ padding:8px 10px 16px; } 
 
+.time-trends-card {
+  width: 50%;        /* exactly half the container width */
+}
+
+.two-col {
+  display: flex;
+  gap: 24px;        /* space between cards */
+}
+
+.two-col .card {
+  flex: 1;          /* each card takes 50% */
+}
+
 /* Vega container size */
 #world_map {
   width: 100%;      /* take the full width of the parent card */
@@ -95,8 +108,11 @@ body{
   color: white;
 }
 
-.section_break{
+.vert_section_break{
   margin-bottom: 18px;
+}
+.hori_section_break{
+  margin-right: 18px;
 }
 
 .flourish-embed {
