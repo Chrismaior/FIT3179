@@ -69,6 +69,8 @@ body{
   box-shadow:0 16px 40px rgba(0, 0, 0, 0.042);
   overflow:hidden;
 }
+
+
 .card-header{
   display:flex; align-items:baseline; justify-content:space-between;
   padding:16px 18px 0;
@@ -92,7 +94,7 @@ body{
 #world_map {
   width: 100%;      /* take the full width of the parent card */
   height: 600px;    /* adjust height so it’s taller */
-  padding-left: 90px;
+  padding-left: 30px;
 }
 
 #homi_line_chart{
@@ -116,45 +118,76 @@ body{
   margin-right: 6px;
 }
 
-/* Align dropdown with chart heading */
-.chart-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* left align with heading */
-}
 
-.chart-container .vega-bindings {
-  margin-top: 4px;
-}
-
-.chart-container .vega-bindings {
+#controls-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;              /* spacing between controls */
   align-items: center;
-  margin-top: 8px;
+  gap: 12px;
+  margin: 8px 0 4px;
 }
 
-/* Style labels and inputs to match dark theme */
-.chart-container .vega-bindings label {
-  color: white;
-  font-weight: bold;
+#controls-row label {        /* “Country:” and checkbox label */
+  color: #fff;
+  font-weight: 600;
   margin-right: 4px;
+  font-weight: bold;
 }
 
-.chart-container .vega-bindings select,
-.chart-container .vega-bindings input[type="checkbox"] {
-  background-color: #1e293b;
+#controls-row select,
+#controls-row input[type="checkbox"] {
+  background: #1e293b;
+  color: #fff;
+  border: 1px solid #475569;
+  border-radius: 4px;
+  padding: 2px 6px;
+  height: 28px;              /* smaller control */
+  font-weight: bold;
+  font-size: 12px;
+
+}
+
+
+
+#controls-top, #controls-bottom {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 15px;
+  padding-top: 10px;
+}
+
+#controls-top label {
+  color: white;
+  margin-right: 4px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+#controls-top select,
+#controls-bottom select,
+#controls-bottom input[type="range"],
+#controls-top input[type="checkbox"] {
+  background: #1e293b;
   color: white;
   border: 1px solid #475569;
-  padding: 2px 6px;
   border-radius: 4px;
+  padding: 2px 6px;
+  font-weight: bold;
+  font-size: 15px;
 }
- 
+
+
+#time-trends-caption{
+  margin-right: 850px;
+  margin-left: 22px;
+}
+
+
  .caption{
-  max-width: 1300px;          /* match the map width */
-  margin: 5px 95px;        /* centered, just below the chart */
-  padding-left: 1px;
+  margin-right: 33px;          
+  margin-left: 33px;       /* centered, just below the chart */
   font-size: 23px;
   line-height: 1.45;
   color: white;

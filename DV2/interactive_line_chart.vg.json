@@ -5,44 +5,58 @@
   "background": "transparent",
   "data": { "url": "data/homicide_filtered-Country.csv" },
 
-  "params": [
-    {
-      "name": "country",
-      "value": "Afghanistan",
-      "bind": {
-        "input": "select",
-        "name": "Country: ",
-        "options": [
-          "Afghanistan","Australia","Colombia","Estonia","El Salvador","Honduras","Iraq",
-          "Kazakhstan","Kyrgyzstan","Lithuania","Mexico","Mongolia","Lesotho",
-          "Montenegro","Morocco","Philippines","Poland",
-          "Papua New Guinea","Qatar","Republic of Korea","Russian Federation","South Africa",
-          "Spain","Turkmenistan","Uganda","Ukraine","United Arab Emirates","Uzbekistan"
-        ]
-      }
-    },
-    {
-      "name": "compare",
-      "value": "Australia",
-      "bind": {
-        "input": "select",
-        "name": " Compare: ",
-        "options": [
-          "Afghanistan","Australia","Colombia","Estonia","El Salvador","Honduras","Iraq",
-          "Kazakhstan","Kyrgyzstan","Lithuania","Mexico","Mongolia","Lesotho",
-          "Montenegro","Morocco","Philippines","Poland",
-          "Papua New Guinea","Qatar","Republic of Korea","Russian Federation","South Africa",
-          "Spain","Turkmenistan","Uganda","Ukraine","United Arab Emirates","Uzbekistan"
-        ]
-      }
-    },
-    { "name": "yearStart", "value": 1990,
-      "bind": {"input":"range","name":" From: ","min":1990,"max":2018,"step":1} },
-    { "name": "yearEnd", "value": 2018,
-      "bind": {"input":"range","name":" To: ","min":1990,"max":2018,"step":1} },
-    { "name": "showMA", "value": false,
-      "bind": {"input":"checkbox","name":"  Moving Avg (5yr) "} }
-  ],
+"params": [
+  {
+    "name": "country",
+    "value": "Colombia",
+    "bind": {
+      "input": "select",
+      "name": "Country: ",
+      "options": [
+        "Afghanistan","Australia","Colombia","Estonia","El Salvador","Honduras","Iraq",
+        "Kazakhstan","Kyrgyzstan","Lithuania","Mexico","Mongolia","Lesotho",
+        "Montenegro","Morocco","Philippines","Poland",
+        "Papua New Guinea","Qatar","Republic of Korea","Russian Federation","South Africa",
+        "Spain","Turkmenistan","Uganda","Ukraine","United Arab Emirates","Uzbekistan"
+      ],
+      "element": "#ctl-country"
+    }
+  },
+  {
+    "name": "showMA",
+    "value": false,
+    "bind": {
+      "input": "checkbox",
+      "name": "  Moving Avg (5yr) ",
+      "element": "#ctl-ma"
+    }
+  },
+  {
+    "name": "compare",
+    "value": "El Salvador",
+    "bind": {
+      "input": "select",
+      "name": "Compare: ",
+      "options": ["Afghanistan","Australia","Colombia","Estonia", "El Salvador","Honduras","Iraq",
+        "Kazakhstan","Kyrgyzstan","Lithuania","Mexico","Mongolia","Lesotho",
+        "Montenegro","Morocco","Philippines","Poland",
+        "Papua New Guinea","Qatar","Republic of Korea","Russian Federation","South Africa",
+        "Spain","Turkmenistan","Uganda","Ukraine","United Arab Emirates","Uzbekistan"
+      ],
+      "element": "#ctl-compare"
+    }
+  },
+  {
+    "name": "yearStart",
+    "value": 1990,
+    "bind": {"input":"range","name":" From: ","min":1990,"max":2018,"step":1,"element":"#ctl-from"}
+  },
+  {
+    "name": "yearEnd",
+    "value": 2018,
+    "bind": {"input":"range","name":" To: ","min":1990,"max":2018,"step":1,"element":"#ctl-to"}
+  }
+],
 
   "transform": [
     { "filter": "datum.Territory == country || (compare != '' && datum.Territory == compare)" },
@@ -53,7 +67,7 @@
 
   "layer": [
     {
-      "mark": { "type": "line", "point": {"filled": true, "size": 60}, "strokeWidth": 3, "stroke": "#facc15" },
+      "mark": { "type": "line", "point": {"filled": true, "size": 60}, "strokeWidth": 3},
       "encoding": {
         "x": {
           "field": "Year", "type": "quantitative",
@@ -67,8 +81,8 @@
         },
         "color": {
           "field": "Territory", "type": "nominal",
-          "scale": {"range": ["#facc15", "#60a5fa"]},
-          "legend": {"title": "", "labelColor": "white", "orient": "top-left"}
+          "scale": {"range": ["#facc15", "#22c55e"]},
+          "legend": {"title": "", "labelColor": "white", "orient": "top-right"}
         },
         "tooltip": [
           {"field":"Territory","title":"Country"},
