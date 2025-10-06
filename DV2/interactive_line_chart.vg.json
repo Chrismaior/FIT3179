@@ -1,49 +1,106 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Value over Time — Country vs Region",
-  "width": 800,
+  "width": 750,
   "height": 420,
-  "data": { "url": "data/homicide_total_rate_and_count.csv" },
+  "background": "transparent",
+  "data": { "url": "data/homicide_filtered-Country.csv" },
 
   "params": [
     {
-      "name": "countrySel",
-      "value": null,
+      "name": "country",
+      "value": "Afghanistan",
       "bind": {
         "input": "select",
-        "name": "Territory (Country): ",
-        "options": [null, "Australia", "United States", "India", "Brazil", "South Africa"]
+        "name": "Country: ",
+        "options": [
+          "Afghanistan","Australia","Colombia","Estonia","El Salvador","Honduras","Iraq",
+          "Kazakhstan","Kyrgyzstan","Lithuania","Mexico","Mongolia","Lesotho",
+          "Montenegro","Morocco","Philippines","Poland",
+          "Papua New Guinea","Qatar","Republic of Korea","Russian Federation","South Africa",
+          "Spain","Turkmenistan","Uganda","Ukraine","United Arab Emirates","Uzbekistan"
+        ]
       }
     },
     {
-      "name": "regionSel",
-      "value": null,
+      "name": "compare",
+      "value": "Australia",
       "bind": {
         "input": "select",
-        "name": "Region (Continent): ",
-        "options": [null, "Europe", "Asia", "Africa", "Americas", "Oceania"]
+        "name": " Compare: ",
+        "options": [
+          "Afghanistan","Australia","Colombia","Estonia","El Salvador","Honduras","Iraq",
+          "Kazakhstan","Kyrgyzstan","Lithuania","Mexico","Mongolia","Lesotho",
+          "Montenegro","Morocco","Philippines","Poland",
+          "Papua New Guinea","Qatar","Republic of Korea","Russian Federation","South Africa",
+          "Spain","Turkmenistan","Uganda","Ukraine","United Arab Emirates","Uzbekistan"
+        ]
       }
-    }
+    },
+    { "name": "yearStart", "value": 1990,
+      "bind": {"input":"range","name":" From: ","min":1990,"max":2018,"step":1} },
+    { "name": "yearEnd", "value": 2018,
+      "bind": {"input":"range","name":" To: ","min":1990,"max":2018,"step":1} },
+    { "name": "showMA", "value": false,
+      "bind": {"input":"checkbox","name":"  Moving Avg (5yr) "} }
+  ],
+
+  "transform": [
+    { "filter": "datum.Territory == country || (compare != '' && datum.Territory == compare)" },
+    { "filter": "datum.Year >= yearStart && datum.Year <= yearEnd" },
+    { "window": [{"op":"mean","field":"Value","as":"MA5"}],
+      "frame":[-2,2], "sort":[{"field":"Year"}] }
   ],
 
   "layer": [
     {
-      "transform": [{ "filter": "countrySel != null && datum.Country == countrySel" }],
-      "mark": { "type": "line", "strokeWidth": 2.5, "color": "#2563eb" },
+      "mark": { "type": "line", "point": {"filled": true, "size": 60}, "strokeWidth": 3, "stroke": "#facc15" },
       "encoding": {
-        "x": { "field": "Year", "type": "temporal" },
-        "y": { "field": "Value", "type": "quantitative" },
-        "tooltip": ["Country", "Year", "Value"]
+        "x": {
+          "field": "Year", "type": "quantitative",
+          "axis": { "title": "Year", "format": "d", "tickMinStep": 1,
+                    "tickColor":"white", "labelColor":"white", "titleColor":"white" }
+        },
+        "y": {
+          "field": "Value", "type": "quantitative",
+          "scale": {"type": {"expr": "logY ? 'log' : 'linear'"}},
+          "axis": { "title": "Value", "tickColor":"white", "labelColor":"white", "titleColor":"white" }
+        },
+        "color": {
+          "field": "Territory", "type": "nominal",
+          "scale": {"range": ["#facc15", "#60a5fa"]},
+          "legend": {"title": "", "labelColor": "white", "orient": "top-left"}
+        },
+        "tooltip": [
+          {"field":"Territory","title":"Country"},
+          {"field":"Year","type":"quantitative","title":"Year","format":"d"},
+          {"field":"Value","type":"quantitative","title":"Value","format":",.2f"},
+          {"field":"Source","title":"Source"},
+          {"field":"Source Description","title":"Source Description"}
+        ],
+        "order": {"field":"Year","type":"quantitative"}
       }
     },
     {
-
-      "mark": { "type": "line", "strokeWidth": 2.5, "strokeDash": [6, 4], "color": "#ef4444" },
+      "transform": [ { "filter": "showMA" } ],
+      "mark": { "type": "line", "stroke": "#f59e0b", "strokeDash": [6,4], "strokeWidth": 2 },
       "encoding": {
-        "x": { "field": "Year", "type": "temporal" },
-        "y": { "field": "Value", "type": "quantitative" },
-        "tooltip": ["Region", "Year", { "field": "Value", "title": "Mean Value" }]
+        "x": {"field":"Year","type":"quantitative"},
+        "y": {"field":"MA5","type":"quantitative"},
+        "color": {"field":"Territory","legend": null}
+      }
+    },
+    {
+      "mark": {"type":"rule","stroke":"#94a3b8","strokeWidth":1},
+      "encoding": {
+        "y": {"aggregate":"mean","field":"Value"},
+        "color": {"value":"#94a3b8"},
+        "tooltip": [{"aggregate":"mean","field":"Value","title":"Mean Value", "format":",.2f"}]
       }
     }
-  ]
+  ],
+
+  "config": {
+    "axis": { "grid": false, "domain": true, "domainColor": "white", "tickColor": "white" },
+    "view": { "stroke": null }
+  }
 }
