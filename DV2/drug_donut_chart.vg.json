@@ -1,0 +1,86 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "width": 420,
+  "height": 320,
+
+  "data": {
+    "values": [
+      {"Region": "Europe",   "Value": 7353741},
+      {"Region": "Africa",   "Value": 1230061},
+      {"Region": "Americas", "Value": 3160960},
+      {"Region": "Asia",     "Value": 4566511},
+      {"Region": "Oceania",  "Value": 643561}
+    ]
+  },
+
+  "transform": [
+    {"joinaggregate": [{"op": "sum", "field": "Value", "as": "Total"}]},
+    {"calculate": "datum.Value / datum.Total", "as": "Percent"},
+    {"calculate": "format(datum.Percent, '.1%')", "as": "PercentLabel"}
+  ],
+
+  "layer": [
+    {
+      "mark": {"type": "arc", "innerRadius": 110, "stroke": null},
+      "encoding": {
+        "theta": {"field": "Value", "type": "quantitative", "stack": true},
+        "color": {
+          "field": "Region",
+          "type": "nominal",
+          "scale": {"range": ["#60a5fa", "#22c55e", "#f59e0b", "#a78bfa", "#f43f5e"]},
+          "legend": {
+            "title": "",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "labelColor": "white",
+            "labelFontSize": 14,
+            "symbolSize": 260,
+            "padding": 25 
+          }
+        },
+        "tooltip": [
+          {"field": "Region", "type": "nominal"},
+          {"field": "Value", "type": "quantitative", "title": "Offences", "format": ",d"},
+          {"field": "Percent", "type": "quantitative", "title": "Share", "format": ".1%"}
+        ]
+      }
+    },
+
+
+    {
+      "mark": {
+        "type": "text",
+        "fill": "white",
+        "fontSize": 16,
+        "radius": {"expr": "min(width, height)/2"},
+        "radiusOffset": 25,                          
+        "stroke": "white",
+        "strokeWidth": 0.25
+      },
+      "encoding": {
+        "theta": {"field": "Value", "type": "quantitative", "stack": true},
+        "text": {"field": "PercentLabel"}
+      }
+    },
+
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 16,
+        "fill": "white",
+        "lineBreak": "\n"                            
+      },
+      "encoding": {
+        "text": {"value": "Drug-related Offences\nby Region, 2023"}
+      }
+    }
+  ],
+
+  "config": {
+    "view": {"stroke": null}
+  }
+}

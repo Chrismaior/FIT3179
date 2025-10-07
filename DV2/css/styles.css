@@ -102,6 +102,11 @@ body{
   width: 100px;
 }
 
+#drug_donut{
+  margin-top: 15px;
+  margin-left: 3px;
+}
+
 .vega-bindings select {
   font-size: 14px;
   padding: 4px 6px;
@@ -184,6 +189,11 @@ body{
   margin-left: 22px;
 }
 
+#treemap-caption{
+  margin-left: 22px;
+  margin-right: 33px;
+}
+
 
  .caption{
   margin-right: 33px;          
@@ -201,12 +211,13 @@ body{
 }
 
 .flourish-embed {
-  width: 100%;         /* makes it adapt to container */
-  max-width: 900px;    /* keep it smaller than full screen */
-  margin: 30px auto;   /* spacing between sections */
+
+  margin-left: 22px;
+  margin-right: 33px;
   border-radius: 12px; /* rounded corners */
   background: transparent !important; /* force no background */
   box-shadow: 0 4px 12px rgba(0,0,0,0.25); /* optional shadow */
+
 }
 
 .flourish-embed iframe {
