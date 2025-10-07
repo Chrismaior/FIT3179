@@ -14,3 +14,13 @@ var vg_3 = "drug_donut_chart.vg.json";
 vegaEmbed("#drug_donut", vg_3).then(function(result) {
 
 }).catch(console.error);
+
+var vg_4 = "homicide_donut_chart.vg.json";
+vegaEmbed("#homicide_donut", vg_4).then(function(result) {
+
+}).catch(console.error);
+
+var vg_5 = "economic_donut_chart.vg.json";
+vegaEmbed("#economic_donut", vg_5).then(function(result) {
+
+}).catch(console.error);

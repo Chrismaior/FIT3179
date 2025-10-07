@@ -6,11 +6,11 @@
 
   "data": {
     "values": [
-      {"Region": "Europe",   "Value": 7353741},
-      {"Region": "Africa",   "Value": 1230061},
-      {"Region": "Americas", "Value": 3160960},
-      {"Region": "Asia",     "Value": 4566511},
-      {"Region": "Oceania",  "Value": 643561}
+      {"Region": "Europe",   "Value": 7898},
+      {"Region": "Africa",   "Value": 41507},
+      {"Region": "Americas", "Value": 147594},
+      {"Region": "Asia",     "Value": 30053},
+      {"Region": "Oceania",  "Value": 389}
     ]
   },
 
@@ -75,7 +75,7 @@
         "lineBreak": "\n"                            
       },
       "encoding": {
-        "text": {"value": "Drug-related Offences\nby Region, 2023"}
+        "text": {"value": "Intentional Homicide Related\nCrimes by Region, 2023"}
       }
     }
   ],
