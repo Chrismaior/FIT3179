@@ -6,11 +6,11 @@
 
   "data": {
     "values": [
-      {"Region": "Europe",   "Value": 325688},
-      {"Region": "Africa",   "Value": 52286},
-      {"Region": "Americas", "Value": 102266},
-      {"Region": "Asia",     "Value": 189432},
-      {"Region": "Oceania",  "Value": 91}
+      {"Region": "Europe",   "Value": 1840606},
+      {"Region": "Africa",   "Value": 152577},
+      {"Region": "Americas", "Value": 1852875},
+      {"Region": "Asia",     "Value": 310553},
+      {"Region": "Oceania",  "Value": 189290}
     ]
   },
 
@@ -29,15 +29,7 @@
           "field": "Region",
           "type": "nominal",
           "scale": {"range": ["#132856", "#1354d9", "#ffc0de", "#e43f77", "#6a9ab7"]},
-          "legend": {
-            "title": "",
-            "orient": "bottom",
-            "direction": "horizontal",
-            "labelColor": "white",
-            "labelFontSize": 14,
-            "symbolSize": 260,
-            "padding": 25 
-          }
+          "legend": null
         },
         "tooltip": [
           {"field": "Region", "type": "nominal"},
@@ -75,7 +67,7 @@
         "lineBreak": "\n"                            
       },
       "encoding": {
-        "text": {"value": "Economic & Corruption\nRelated Crimes by Region,\n2023"}
+        "text": {"value": "Violent & Sexual Crime\nOffences by Region, 2023"}
       }
     }
   ],

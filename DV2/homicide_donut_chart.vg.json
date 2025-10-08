@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": "transparent",
-  "width": 420,
-  "height": 320,
+  "width": 300,
+  "height": 300,
 
   "data": {
     "values": [
@@ -28,16 +28,8 @@
         "color": {
           "field": "Region",
           "type": "nominal",
-          "scale": {"range": ["#d73027", "#fc8d59", "#fee090", "#91bfdb", "#4575b4"]},
-          "legend": {
-            "title": "",
-            "orient": "bottom",
-            "direction": "horizontal",
-            "labelColor": "white",
-            "labelFontSize": 14,
-            "symbolSize": 260,
-            "padding": 25 
-          }
+          "scale": {"range": ["#132856", "#1354d9", "#ffc0de", "#e43f77", "#6a9ab7"]},
+          "legend": null
         },
         "tooltip": [
           {"field": "Region", "type": "nominal"},

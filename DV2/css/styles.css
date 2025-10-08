@@ -102,13 +102,38 @@ body{
   width: 100px;
 }
 
-#drug_donut{
-  margin-top: 15px;
-  margin-left: 3px;
+
+.chart-table{
+  margin-top: 18px;
+  width: 90%;
+  border-collapse: collapse;
+  table-layout: fixed;           /* equal columns, prevents overflow jiggle */
 }
+
+.chart-table td{
+  width: 50%;                    /* two equal halves */
+  padding: 0 16px;               /* gap between charts */
+  border: none;
+  vertical-align: top;
+}
+
+/* Center the chart inside each cell and remove ad-hoc margins */
 #homicide_donut{
-  margin-left: 3px;
+  margin-left: 40px;                /* center within the td */
+
 }
+#drug_donut{
+  margin-left: 5px;
+}
+
+#economic_donut{
+  margin-left: 5px;
+}
+
+#violence_donut{
+  margin-left: 40px;
+}
+
 
 .vega-bindings select {
   font-size: 14px;
@@ -197,6 +222,10 @@ body{
   margin-right: 33px;
 }
 
+.types-crime-caption{
+  margin-left: 22px;
+  margin-right: 33px;
+}
 
  .caption{
   margin-right: 33px;          
@@ -209,6 +238,7 @@ body{
 .vert_section_break{
   margin-bottom: 18px;
 }
+
 .hori_section_break{
   margin-right: 18px;
 }

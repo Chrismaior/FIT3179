@@ -24,3 +24,8 @@ var vg_5 = "economic_donut_chart.vg.json";
 vegaEmbed("#economic_donut", vg_5).then(function(result) {
 
 }).catch(console.error);
+
+var vg_6 = "violence_donut_chart.vg.json";
+vegaEmbed("#violence_donut", vg_6).then(function(result) {
+
+}).catch(console.error);
