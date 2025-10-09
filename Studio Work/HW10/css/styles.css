@@ -1,0 +1,276 @@
+/* ---------- Theme ---------- */
+:root{
+  /* you can tweak this one hex to make it lighter/darker */
+  --ink:#344460;            /* lighter, clean slate/navy */
+  --panel:#1f2940cc;
+  --panel-border:#ffffff22;
+  --text:#e8edf5;
+  --muted:#a8b3c7;
+  --accent:#eab308;
+  --danger:#ef4444;
+}
+
+body{
+  margin:0;
+  color:var(--text);
+  font:20px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+
+  /* single-colour background */
+  background: var(--ink);
+}
+
+.container{
+  max-width:1700px;
+  margin:0 auto;
+  padding:0 18px 48px;
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  max-width:1650px;
+  margin:28px auto 18px;
+  padding:22px 24px 16px;
+  background:linear-gradient(180deg,#ffffff6b,#ffffff2b);
+  border:1px solid var(--panel-border);
+  border-radius:20px;
+  box-shadow:0 10px 30px #0006, inset 0 1px 0 #ffffff1c;
+}
+.hero .eyebrow{
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  color:var(--accent);
+  font-weight:800;
+  font-size:.78rem;
+  margin-bottom:6px;
+}
+.hero h1{
+  margin:0;
+  font-weight:900;
+  letter-spacing:.5px;
+  font-size:clamp(28px,6vw,56px);
+}
+
+/* fun “crime tape” accent */
+.tape{
+  height:14px;
+  margin-top:14px;
+  border-radius:8px;
+  background-image:
+    repeating-linear-gradient(135deg, var(--accent) 0 26px, #111 26px 38px);
+  box-shadow:0 8px 18px #0008;
+
+}
+
+/* ---------- Cards ---------- */
+.card{
+  background:var(--panel);
+  border:1px solid var(--panel-border);
+  border-radius:18px;
+  box-shadow:0 16px 40px rgba(0, 0, 0, 0.042);
+  overflow:hidden;
+}
+
+
+.card-header{
+  display:flex; align-items:baseline; justify-content:space-between;
+  padding:16px 18px 0;
+}
+.card-title{font-weight:800; font-size:2.5rem; color:#e2e8f0}
+.card-subtitle{font-size:.9rem; color:var(--muted)}
+
+.map-card{ padding:8px 10px 16px; } 
+
+
+.two-col {
+  display: flex;
+  gap: 24px;        /* space between cards */
+}
+
+.two-col .card {
+  flex: 1;          /* each card takes 50% */
+}
+
+/* Vega container size */
+#world_map {
+  width: 100%;      /* take the full width of the parent card */
+  height: 600px;    /* adjust height so it’s taller */
+  padding-left: 30px;
+}
+
+#homi_line_chart{
+  margin-left: 15px;
+  width: 100px;
+}
+
+
+.chart-table{
+  margin-top: 18px;
+  width: 90%;
+  border-collapse: collapse;
+  table-layout: fixed;           /* equal columns, prevents overflow jiggle */
+}
+
+.chart-table td{
+  width: 50%;                    /* two equal halves */
+  padding: 0 16px;               /* gap between charts */
+  border: none;
+  vertical-align: top;
+}
+
+/* Center the chart inside each cell and remove ad-hoc margins */
+#homicide_donut{
+  margin-left: 40px;                /* center within the td */
+
+}
+#drug_donut{
+  margin-left: 5px;
+}
+
+#economic_donut{
+  margin-left: 5px;
+}
+
+#violence_donut{
+  margin-left: 40px;
+}
+
+
+.vega-bindings select {
+  font-size: 14px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  background-color: #1e293b; /* match dark theme */
+  color: white;
+  border: 1px solid #475569;
+}
+
+/* Style the label (Country:) */
+.vega-bindings label {
+  color: white;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+
+#controls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 4px;
+}
+
+#controls-row label {        /* “Country:” and checkbox label */
+  color: #fff;
+  font-weight: 600;
+  margin-right: 4px;
+  font-weight: bold;
+}
+
+#controls-row select,
+#controls-row input[type="checkbox"] {
+  background: #1e293b;
+  color: #fff;
+  border: 1px solid #475569;
+  border-radius: 4px;
+  padding: 2px 6px;
+  height: 28px;              /* smaller control */
+  font-weight: bold;
+  font-size: 12px;
+
+}
+
+
+
+#controls-top, #controls-bottom {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 15px;
+  padding-top: 10px;
+}
+
+#controls-top label {
+  color: white;
+  margin-right: 4px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+#controls-top select,
+#controls-bottom select,
+#controls-bottom input[type="range"],
+#controls-top input[type="checkbox"] {
+  background: #1e293b;
+  color: white;
+  border: 1px solid #475569;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+
+#time-trends-caption{
+  margin-right: 850px;
+  margin-left: 22px;
+}
+
+#treemap-caption{
+  margin-left: 22px;
+  margin-right: 33px;
+}
+
+.types-crime-caption{
+  margin-left: 22px;
+  margin-right: 33px;
+}
+
+ .caption{
+  margin-right: 33px;          
+  margin-left: 33px;       /* centered, just below the chart */
+  font-size: 23px;
+  line-height: 1.45;
+  color: white;
+}
+
+.vert_section_break{
+  margin-bottom: 18px;
+}
+
+.hori_section_break{
+  margin-right: 18px;
+}
+
+.flourish-embed {
+
+  margin-left: 22px;
+  margin-right: 33px;
+  border-radius: 12px; /* rounded corners */
+  background: transparent !important; /* force no background */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25); /* optional shadow */
+
+}
+
+.flourish-embed iframe {
+  background: transparent !important; 
+  width: 100% !important;
+}
+
+.chart-subtitle{
+  margin-left: 22px;
+  margin-bottom: 3px;
+  margin-top: 3px;
+  font-size: 15px;
+}
+
+
+/* Footer */
+footer{ text-align:center; color:var(--muted); padding:28px 0; }
+
+/* Responsive tweak */
+@media (max-width:1000px){
+  .card-title{font-size:1rem}
+  #world_map{height:60vh}
+}

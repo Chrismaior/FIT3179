@@ -1,0 +1,73 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "title": { "text": "Crime Rate by Country 2025", "color": "#ffffff" },
+  "autosize": { "type": "fit", "contains": "padding" },
+  "width": "container",
+  "height": 750,
+  "projection": { "type": "naturalEarth1" },
+
+  "layer": [
+    { "data": { "sphere": true }, "mark": { "type": "geoshape", "fill": "#dbeafe" }},
+
+    {
+      "data": { "graticule": { "step": [30, 30], "extent": [[-180, -90], [180, 90]], "precision": 2 } },
+      "mark": { "type": "geoshape", "stroke": "#94a3b8", "strokeWidth": 0.6, "strokeOpacity": 0.6, "strokeCap": "round" }
+    },
+
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+        "format": { "type": "topojson", "feature": "ne_110m_admin_0_countries" }
+      },
+      "mark": { "type": "geoshape", "fill": "#e0e0e1", "stroke": "black", "strokeWidth": 0.35 },
+      "encoding": { "tooltip": [{ "field": "properties.NAME", "type": "nominal", "title": "Country" }] }
+    },
+
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+        "format": { "type": "topojson", "feature": "ne_110m_admin_0_countries" }
+      },
+      "transform": [
+        {
+          "lookup": "properties.ISO_A2",
+          "from": {
+            "data": {
+              "url": "data/crime-rate-by-country-2025.csv",
+              "format": { "type": "csv", "parse": { "NumbeoCrimeIndex_2024": "number" } }
+            },
+            "key": "flagCode",
+            "fields": ["NumbeoCrimeIndex_2024", "country"]
+          }
+        },
+        { "filter": "isValid(datum.NumbeoCrimeIndex_2024) && !isNaN(datum.NumbeoCrimeIndex_2024)" }
+      ],
+      "mark": { "type": "geoshape", "stroke": "black", "strokeWidth": 0.35 },
+      "encoding": {
+        "color": {
+          "field": "NumbeoCrimeIndex_2024",
+          "type": "quantitative",
+          "title": "Crime Index Number (1–100)",
+          "scale": { "scheme": "yellowgreenblue" },
+          "legend": {
+            "type": "symbol",
+            "symbolType": "circle",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "titleColor": "white",
+            "labelColor": "white",
+            "symbolStrokeColor": "white",
+            "symbolSize": 175
+          }
+        },
+        "tooltip": [
+          { "field": "properties.NAME", "type": "nominal", "title": "Country" },
+          { "field": "NumbeoCrimeIndex_2024", "type": "quantitative", "title": "Crime Index", "format": ".1f" }
+        ]
+      }
+    }
+  ],
+
+  "config": { "background": "#ffffff", "view": { "stroke": null } }
+}

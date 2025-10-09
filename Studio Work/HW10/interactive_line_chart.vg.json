@@ -1,0 +1,120 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 750,
+  "height": 420,
+  "background": "transparent",
+  "data": { "url": "data/homicide_filtered-Country.csv" },
+
+"params": [
+  {
+    "name": "country",
+    "value": "Colombia",
+    "bind": {
+      "input": "select",
+      "name": "Country: ",
+      "options": [
+        "Afghanistan","Australia","Colombia","Estonia","El Salvador","Honduras","Iraq",
+        "Kazakhstan","Kyrgyzstan","Lithuania","Mexico","Mongolia","Lesotho",
+        "Montenegro","Morocco","Philippines","Poland",
+        "Papua New Guinea","Qatar","Republic of Korea","Russian Federation","South Africa",
+        "Spain","Turkmenistan","Uganda","Ukraine","United Arab Emirates","Uzbekistan"
+      ],
+      "element": "#ctl-country"
+    }
+  },
+  {
+    "name": "showMA",
+    "value": false,
+    "bind": {
+      "input": "checkbox",
+      "name": "  Moving Avg (5yr) ",
+      "element": "#ctl-ma"
+    }
+  },
+  {
+    "name": "compare",
+    "value": "El Salvador",
+    "bind": {
+      "input": "select",
+      "name": "Compare: ",
+      "options": ["Afghanistan","Australia","Colombia","Estonia", "El Salvador","Honduras","Iraq",
+        "Kazakhstan","Kyrgyzstan","Lithuania","Mexico","Mongolia","Lesotho",
+        "Montenegro","Morocco","Philippines","Poland",
+        "Papua New Guinea","Qatar","Republic of Korea","Russian Federation","South Africa",
+        "Spain","Turkmenistan","Uganda","Ukraine","United Arab Emirates","Uzbekistan"
+      ],
+      "element": "#ctl-compare"
+    }
+  },
+  {
+    "name": "yearStart",
+    "value": 1990,
+    "bind": {"input":"range","name":" From: ","min":1990,"max":2018,"step":1,"element":"#ctl-from"}
+  },
+  {
+    "name": "yearEnd",
+    "value": 2018,
+    "bind": {"input":"range","name":" To: ","min":1990,"max":2018,"step":1,"element":"#ctl-to"}
+  }
+],
+
+  "transform": [
+    { "filter": "datum.Territory == country || (compare != '' && datum.Territory == compare)" },
+    { "filter": "datum.Year >= yearStart && datum.Year <= yearEnd" },
+    { "window": [{"op":"mean","field":"Value","as":"MA5"}],
+      "frame":[-2,2], "sort":[{"field":"Year"}] }
+  ],
+
+  "layer": [
+    {
+      "mark": { "type": "line", "point": {"filled": true, "size": 60}, "strokeWidth": 3},
+      "encoding": {
+        "x": {
+          "field": "Year", "type": "quantitative",
+          "axis": { "title": "Year", "format": "d", "tickMinStep": 1,
+                    "tickColor":"white", "labelColor":"white", "titleColor":"white" }
+        },
+        "y": {
+          "field": "Value", "type": "quantitative",
+          "scale": {"type": {"expr": "logY ? 'log' : 'linear'"}},
+          "axis": { "title": "Value", "tickColor":"white", "labelColor":"white", "titleColor":"white" }
+        },
+        "color": {
+          "field": "Territory", "type": "nominal",
+          "scale": {"range": ["#facc15", "#22c55e"]},
+          "legend": {"title": "", "labelColor": "white", "orient": "top-right"}
+        },
+        "tooltip": [
+          {"field":"Territory","title":"Country"},
+          {"field":"Year","type":"quantitative","title":"Year","format":"d"},
+          {"field":"Value","type":"quantitative","title":"Value","format":",.2f"},
+          {"field":"Source","title":"Source"},
+          {"field":"Source Description","title":"Source Description"}
+        ],
+        "order": {"field":"Year","type":"quantitative"}
+      }
+    },
+    {
+      "transform": [ { "filter": "showMA" } ],
+      "mark": { "type": "line", "stroke": "#f59e0b", "strokeDash": [6,4], "strokeWidth": 2 },
+      "encoding": {
+        "x": {"field":"Year","type":"quantitative"},
+        "y": {"field":"MA5","type":"quantitative"},
+        "color": {"field":"Territory","legend": null}
+      }
+    },
+    {
+      "mark": {"type":"rule","stroke":"#94a3b8","strokeWidth":1},
+      "encoding": {
+        "y": {"aggregate":"mean","field":"Value"},
+        "color": {"value":"#94a3b8"},
+        "tooltip": [{"aggregate":"mean","field":"Value","title":"Mean Value", "format":",.2f"}]
+      }
+    }
+  ],
+
+  "config": {
+    "axis": { "grid": false, "domain": true, "domainColor": "white", "tickColor": "white" },
+    "view": { "stroke": null }
+  }
+}
