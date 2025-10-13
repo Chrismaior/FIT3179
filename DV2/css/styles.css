@@ -164,6 +164,12 @@ body{
   margin-top: 22px;
 }
 
+#resilience_bar{
+  margin-top: 15px;
+  margin-left: 22px;
+  margin-right: 50px;
+}
+
 /* Style the label (Country:) */
 .vega-bindings label {
   color: white;

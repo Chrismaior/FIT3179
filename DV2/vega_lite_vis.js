@@ -34,3 +34,8 @@ var vg_7 = "boxplot.vg.json";
 vegaEmbed("#boxplot", vg_7).then(function(result) {
 
 }).catch(console.error);
+
+var vg_8 = "resilience_avg.vg.json";
+vegaEmbed("#resilience_bar", vg_8).then(function(result) {
+
+}).catch(console.error);
