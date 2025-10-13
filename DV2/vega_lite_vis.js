@@ -29,3 +29,8 @@ var vg_6 = "violence_donut_chart.vg.json";
 vegaEmbed("#violence_donut", vg_6).then(function(result) {
 
 }).catch(console.error);
+
+var vg_7 = "boxplot.vg.json";
+vegaEmbed("#boxplot", vg_7).then(function(result) {
+
+}).catch(console.error);

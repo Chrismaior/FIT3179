@@ -135,6 +135,23 @@ body{
 }
 
 
+/* widths (tweak to taste) */
+.viz-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+}
+.viz-table td {
+  border: 0;
+  background: transparent;
+  vertical-align: top;        /* align tops */
+  padding: 0 5px 10px 22px;
+}
+
+/* Column widths: chart 60%, text 40% */
+.viz-table .plot   { width: 60%; }
+.viz-table .caption{ width: 40%; }
+
 .vega-bindings select {
   font-size: 14px;
   padding: 4px 6px;
@@ -142,6 +159,9 @@ body{
   background-color: #1e293b; /* match dark theme */
   color: white;
   border: 1px solid #475569;
+}
+#boxplot{
+  margin-top: 22px;
 }
 
 /* Style the label (Country:) */
@@ -212,10 +232,6 @@ body{
 }
 
 
-#time-trends-caption{
-  margin-right: 850px;
-  margin-left: 22px;
-}
 
 #treemap-caption{
   margin-left: 22px;

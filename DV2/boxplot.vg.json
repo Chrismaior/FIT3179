@@ -1,0 +1,104 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Selected region dropdown; one boxplot per year (2019–2023). Winsorised at 1.5×IQR per (Region, Year).",
+  "width": 740,
+  "height": 360,
+  "background": "transparent",
+
+  "data": { "url": "data/boxplot_data.csv", "format": { "type": "csv" } },
+
+  "params": [
+    {
+      "name": "regionSel",
+      "value": "Asia",
+      "bind": {
+        "input": "select",
+        "name": "Region: ",
+        "options": ["Africa","Americas","Asia","Europe","Oceania"]
+      }
+    }
+  ],
+
+  "transform": [
+    {
+      "calculate": "toString(datum['Year']!=null?datum['Year']:(datum['year']!=null?datum['year']:(datum['Year ']!=null?datum['Year ']: (datum['\\ufeffYear']!=null?datum['\\ufeffYear']:''))))",
+      "as": "YearRaw"
+    },
+    { "calculate": "toNumber(trim(datum.YearRaw))", "as": "YearNum" },
+    { "filter": "isValid(datum.YearNum) && datum.YearNum >= 2019 && datum.YearNum <= 2023" },
+
+    {
+      "calculate": "toString(datum['Region']!=null?datum['Region']:(datum['region']!=null?datum['region']:(datum['RegionClean']!=null?datum['RegionClean']:(datum['Subregion']!=null?datum['Subregion']:(datum['Continent']!=null?datum['Continent']:(datum['Region ']!=null?datum['Region ']: (datum['\\ufeffRegion']!=null?datum['\\ufeffRegion'] : '')))))))",
+      "as": "RegionRaw"
+    },
+    { "calculate": "trim(datum.RegionRaw)", "as": "RegionLabel" },
+    { "filter": "datum.RegionLabel && datum.RegionLabel != ''" },
+
+    { "calculate": "lower(trim(regionSel))", "as": "RegionSelClean" },
+    { "calculate": "lower(trim(datum.RegionLabel))", "as": "RegionClean" },
+    { "filter": "datum.RegionClean == datum.RegionSelClean" },
+
+    {
+      "calculate": "toString(datum['Rate']!=null?datum['Rate']:(datum['Rate per 100k']!=null?datum['Rate per 100k']:(datum['rate']!=null?datum['rate']:(datum['Rate ']!=null?datum['Rate ']: (datum['\\ufeffRate']!=null?datum['\\ufeffRate']:'')))))",
+      "as": "RateRaw"
+    },
+    { "calculate": "toNumber(replace(replace(trim(datum.RateRaw), ',', ''), ' ', ''))", "as": "RateNum" },
+    { "filter": "isValid(datum.RateNum) && isFinite(datum.RateNum)" },
+
+    {
+      "joinaggregate": [
+        { "op": "q1", "field": "RateNum", "as": "Q1" },
+        { "op": "q3", "field": "RateNum", "as": "Q3" }
+      ],
+      "groupby": ["RegionLabel", "YearNum"]
+    },
+    { "calculate": "datum.Q3 - datum.Q1", "as": "IQR" },
+    { "calculate": "datum.Q1 - 1.5 * datum.IQR", "as": "Lower" },
+    { "calculate": "datum.Q3 + 1.5 * datum.IQR", "as": "Upper" },
+    {
+      "calculate": "datum.RateNum < datum.Lower ? datum.Lower : (datum.RateNum > datum.Upper ? datum.Upper : datum.RateNum)",
+      "as": "RateW"
+    },
+
+    { "calculate": "toString(datum.YearNum)", "as": "YearLabel" }
+  ],
+
+  "mark": { "type": "boxplot", "extent": 1.5, "outliers": false, "rule":{"color":"white"}},
+
+  "encoding": {
+    "x": {
+      "field": "YearLabel",
+      "type": "nominal",
+      "title": "Year",
+      "sort": ["2019","2020","2021","2022","2023"],
+      "axis": { "titleColor": "white", "labelColor": "white", "tickColor": "white" }
+    },
+    "y": {
+      "field": "RateW",
+      "type": "quantitative",
+      "title": "Rate per 100k",
+      "scale": { "zero": false },
+      "axis": { "titleColor": "white", "labelColor": "white", "tickColor": "white" }
+    },
+    "color": { "field": "YearLabel", "type": "nominal", "legend": null},
+    "size": { "value": 60 },
+    "tooltip": [
+      { "field": "RegionLabel", "type": "nominal", "title": "Region" },
+      { "field": "YearLabel", "type": "nominal", "title": "Year" },
+      { "field": "RateNum", "type": "quantitative", "title": "Original rate" },
+      { "field": "RateW", "type": "quantitative", "title": "Winsorised rate" },
+      { "field": "Q1", "type": "quantitative" },
+      { "field": "Q3", "type": "quantitative" }
+    ]
+  },
+
+  "title": {
+    "text": "Crime Rate Distribution by Year",
+    "anchor": "start",
+    "fontSize": 16,
+    "color": "white"
+  },
+
+  "config": { "axis":{"grid": false},
+  "view": { "stroke": null } }
+}

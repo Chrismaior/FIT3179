@@ -50,7 +50,7 @@
     <section class="card map-card">
       <div class="card-header">
         <div>
-          <div class="card-title">Global Crime Overview</div>
+          <div class="card-title">Mapping the Geography of Crime</div>
         </div>
       </div>
       <div id="world_map"></div>
@@ -69,7 +69,7 @@
     <section class="card map-card">
       <div class="card-header">
         <div>
-          <div class="card-title">Types of Crime</div>
+          <div class="card-title">Continental breakdown in Crime Types</div>
         </div>
       </div>
       <table class="chart-table">
@@ -100,7 +100,7 @@
     <section class="card map-card">
       <div class="card-header">
         <div>
-          <div class="card-title">Comparisons</div>
+          <div class="card-title">Comparing the World’s Crime Landscape</div>
         </div>
       </div>
       <div class="flourish-embed flourish-hierarchy" data-src="visualisation/25406602">
@@ -134,7 +134,7 @@
   <section class="card map-card">
       <div class="card-header">
         <div>
-          <div class="card-title">Time Trends in Crime</div>
+          <div class="card-title">Decades of Change in Global Crime</div>
         </div>
       </div>
       <h3 class="chart-subtitle">Victims of Intentional Homicide, 1990–2018</h3>
@@ -152,19 +152,30 @@
         <span id="ctl-to"></span>
       </div>
       
-      <div id = "time-trends-caption">
-        <p> Looking at how crime has evolved over time, intentional homicide shows a clear global arc: many countries reached their highest 
-          levels in the early–mid 1990s, followed by a long downward shift through the 2000s, with stabilization or modest decline by 2018. 
-          This pattern is not uniform, as Latin American nations such as El Salvador, Colombia, and Honduras display persistently high and 
-          volatile rates, while Europe and much of Asia trend lower and steadier. By comparing single countries or pairs, the chart 
-          highlights how social, political, and economic contexts shape safety outcomes over time. Intentional
-          homicide was chosen because, as the treemap above demonstrates, it is the dominant crime category across all regions.
-          To enhance exploration, the chart includes interactive controls: a country selector to compare different national contexts, 
-          a time slider to zoom in on specific periods, and a toggle for a 5-year moving average that smooths year-to-year fluctuations and 
-          highlights the underlying trend. Looking at its time trends provides the most direct lens into how societies succeed (or struggle) 
-          in improving public security.</p>
-      </div>
-
+      <table class = "viz-table">
+        <tr>
+          <td class = "viz-cell-caption">
+            <div id = "time-trends-caption">
+              <p> Looking at how crime has evolved over time, intentional homicide shows a clear global arc: many countries reached their highest 
+            levels in the early–mid 1990s, followed by a long downward shift through the 2000s, with stabilization or modest decline by 2018. 
+            This pattern is not uniform, as Latin American nations such as El Salvador, Colombia, and Honduras display persistently high and 
+            volatile rates, while Europe and much of Asia trend lower and steadier. By comparing single countries or pairs, the chart 
+            highlights how social, political, and economic contexts shape safety outcomes over time. Intentional
+            homicide was chosen because, as the treemap above demonstrates, it is the dominant crime category across all regions.
+            To enhance exploration, the chart includes interactive controls: a country selector to compare different national contexts, 
+            a time slider to zoom in on specific periods, and a toggle for a 5-year moving average that smooths year-to-year fluctuations and 
+            highlights the underlying trend. Looking at its time trends provides the most direct lens into how societies work
+            in improving public security. In many ways, these shifts reflect broader transformations, from 
+            peace agreements to changing economic opportunities and law enforcement 
+            strategies. Understanding these trends helps contextualize today’s crime patterns and the progress, 
+            or setbacks, made in public safety.</p>
+            </div>
+          </td>
+          <td class = "viz-cell-plot">
+            <div id = "boxplot"></div>
+          </td>
+        </tr>
+      </table>
     
   </section>
 
@@ -174,9 +185,10 @@
   <section class="card map-card">
     <div class="card-header">
       <div>
-        <div class="card-title">Causes & Drivers of Crime Around the World</div>
+        <div class="card-title">Understanding the Forces Behind Crime</div>
       </div>
     </div>
+    <p>TO BE COMPLETED</p>
   </section>
 
 
