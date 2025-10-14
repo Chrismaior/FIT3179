@@ -36,7 +36,8 @@
             "labelColor": "white",
             "labelFontSize": 14,
             "symbolSize": 260,
-            "padding": 25 
+            "offset": 60,
+            "padding": -30
           }
         },
         "tooltip": [

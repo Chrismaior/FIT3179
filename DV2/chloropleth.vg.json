@@ -57,8 +57,12 @@
             "direction": "horizontal",
             "titleColor": "white",
             "labelColor": "white",
-            "symbolStrokeColor": "white",
-            "symbolSize": 175
+            "labelFontSize": 16,
+            "titleFontSize": 18,
+            "symbolStrokeColor": "transparent",
+            "titleLimit":  600,
+            "symbolSize": 300,
+            "offset": 40
           }
         },
         "tooltip": [
