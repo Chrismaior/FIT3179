@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Average global resilience scores by indicator with inside score labels and ± change outside.",
-  "width": 580,
-  "height": 800,
+  "description": "Average global resilience scores by indicator with grouped order and legible labels.",
+  "width": 1570,
+  "height": 500,
   "background": "transparent",
 
   "data": {
@@ -11,11 +11,14 @@
       {"indicator":"National policies and laws","score":5.48,"delta":0.06,"group":"Leadership and governance"},
       {"indicator":"Political leadership and governance","score":4.70,"delta":-0.03,"group":"Leadership and governance"},
       {"indicator":"Government transparency and accountability","score":4.36,"delta":-0.05,"group":"Leadership and governance"},
+
+      {"indicator":"Anti-money laundering","score":4.71,"delta":0.02,"group":"Economic and financial"},
+      {"indicator":"Economic regulatory capacity","score":4.67,"delta":-0.01,"group":"Economic and financial"},
+
       {"indicator":"Law enforcement","score":4.87,"delta":-0.04,"group":"Criminal justice and security"},
       {"indicator":"Territorial integrity","score":5.06,"delta":-0.05,"group":"Criminal justice and security"},
       {"indicator":"Judicial system and detention","score":4.54,"delta":-0.05,"group":"Criminal justice and security"},
-      {"indicator":"Anti-money laundering","score":4.71,"delta":0.02,"group":"Economic and financial"},
-      {"indicator":"Economic regulatory capacity","score":4.67,"delta":-0.01,"group":"Economic and financial"},
+
       {"indicator":"Non-state actors","score":4.72,"delta":-0.16,"group":"Civil society and social protection"},
       {"indicator":"Prevention","score":4.55,"delta":0.08,"group":"Civil society and social protection"},
       {"indicator":"Victim and witness support","score":4.24,"delta":0.00,"group":"Civil society and social protection"}
@@ -23,123 +26,83 @@
   },
 
   "encoding": {
-    "y": {
-      "field": "indicator",
-      "type": "nominal",
-      "title": null,
-      "sort": [
-        "International cooperation",
-        "National policies and laws",
-        "Political leadership and governance",
-        "Government transparency and accountability",
-        "Law enforcement",
-        "Territorial integrity",
-        "Judicial system and detention",
-        "Anti-money laundering",
-        "Economic regulatory capacity",
-        "Non-state actors",
-        "Prevention",
-        "Victim and witness support"
-      ],
-      "axis": {
-        "labelFontSize": 14,
-        "labelColor": "#ffffff",
-        "labelLimit": 180,
-        "labelLineHeight": 18,
-        "labelPadding": 8,
-        "labelAlign": "right"
-      }
-    },
     "x": {
-      "field": "score",
-      "type": "quantitative",
+      "field": "indicator", "type": "nominal", "title": null,
+      "sort": [
+        "International cooperation","National policies and laws",
+        "Political leadership and governance","Government transparency and accountability",
+        "Anti-money laundering","Economic regulatory capacity",
+        "Law enforcement","Territorial integrity","Judicial system and detention",
+        "Non-state actors","Prevention","Victim and witness support"
+      ],
+      "axis": {"labelFontSize": 12, "labelColor": "white", "labelAngle": -40, "labelPadding": 10, "labelBound":true,
+    "labelLimit":240}
+    },
+    "y": {
+      "field": "score", "type": "quantitative",
       "title": "Average global resilience score (0–10)",
       "scale": {"domain": [0, 8]},
       "axis": {
-        "grid": true,
-        "gridColor": "#e8e8e8",
-        "gridOpacity": 0.2,
-        "tickColor": "#bfbfbf",
-        "labelColor": "white",
-        "titleColor": "white",
-        "labelFontSize": 12,
-        "values": [0,1,2,3,4,5,6,7,8]
+        "grid": true, "gridColor": "#e8e8e8", "gridOpacity": 0.2,
+        "tickColor": "#bfbfbf", "labelColor": "white", "titleColor": "white", "labelFontSize": 12
       }
     },
     "color": {
-      "field": "group",
-      "type": "nominal",
-      "title": null,
+      "field": "group", "type": "nominal", "title": null,
       "scale": {
         "domain": [
           "Leadership and governance",
-          "Criminal justice and security",
           "Economic and financial",
+          "Criminal justice and security",
           "Civil society and social protection"
         ],
-        "range": ["#4F6BED", "#3CB9A1", "#5AA8F5", "#C2C8FF"]
+        "range": ["#3052d9", "#5AA8F5", "#3CB9A1", "#0f87c2"]
       },
-      "legend": {
-        "orient": "bottom-left",
-        "title": null,
-        "labelColor": "white",
-        "labelFontSize": 14,
-        "symbolSize": 150,
-        "direction": "horizontal",
-        "padding": -30,
-        "offset": -130
-      }
+      "legend": {"orient": "bottom", "title": null, "labelColor": "white", "labelFontSize": 14,
+      "symbolSize": 150, "direction": "horizontal", "labelLimit": 300}
     }
   },
 
+  "transform": [
+    {"calculate": "datum.score - 0.25", "as": "score_inside"}  
+  ],
+
   "layer": [
+    { "mark": {"type": "bar", "cornerRadiusTopLeft": 4, "cornerRadiusTopRight": 4, "size": 60} },
+
     {
-      "mark": {"type": "bar", "cornerRadiusEnd": 3, "size": 34}
-    },
-    {
-      "mark": {
-        "type": "text",
-        "align": "right",
-        "dx": -8,
-        "baseline": "middle",
-        "fontSize": 14,
-        "fontWeight": "bold"
-      },
+      "mark": {"type": "text", "align": "center", "baseline": "bottom", "dy": -6, "fontSize": 15},
       "encoding": {
-        "x": {"field": "score"},
-        "y": {"field": "indicator"},
-        "text": {"field": "score", "type": "quantitative", "format": ".2f"},
-        "color": {"value": "white"}
-      }
-    },
-    {
-      "mark": {"type": "text", "align": "left", "dx": 10, "baseline": "middle", "fontSize": 12, "fontWeight":"bold"},
-      "encoding": {
-        "x": {"field": "score"},
-        "y": {"field": "indicator"},
+        "x": {"field": "indicator"},
+        "y": {"field": "score"},
         "text": {"field": "delta", "type": "quantitative", "format": "+.2f"},
         "color": {
           "condition": [
             {"test": "datum.delta > 0", "value": "#2E7D32"},
             {"test": "datum.delta < 0", "value": "#C62828"}
           ],
-          "value": "#6e6e6e"
+          "value": "white"
+        }
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 17
+      },
+      "encoding": {
+        "x": {"field": "indicator"},
+        "y": {"field": "score_inside"},
+        "text": {"field": "score", "type": "quantitative", "format": ".2f"},
+        "color": {"value": "white"            
         }
       }
     }
   ],
 
-  "title": {
-    "text": "Average Global Resilience Scores by Indicator",
-    "fontSize": 18,
-    "fontWeight": "bold",
-    "color": "white",
-    "anchor": "start"
-  },
-
-  "config": {
-    "background": "white",
-    "view": {"stroke": null},
-    "axis": {"grid": false}
-  }
+  "title": {"text": "Average Global Resilience Scores by Indicator", "fontSize": 18, "fontWeight": "bold", "color": "white", "anchor": "start"},
+  "config": {"background": "transparent", "view": {"stroke": null}, "axis": {"grid": false}}
 }

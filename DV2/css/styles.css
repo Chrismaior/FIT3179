@@ -176,8 +176,8 @@ body{
 
 #resilience_bar{
   margin-top: 15px;
-  margin-left: 22px;
-  margin-right: 50px;
+  margin-left: 25px;
+  width: 100%;
 }
 
 /* Style the label (Country:) */
