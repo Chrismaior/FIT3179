@@ -28,7 +28,7 @@
         "color": {
           "field": "Region",
           "type": "nominal",
-          "scale": {"range": ["#132856", "#1354d9", "#ffc0de", "#e43f77", "#6a9ab7"]},
+          "scale": {"range": ["#9e0000", "#5e97ba", "#3052d9", "#f22121", "#0f87c2"]},
           "legend": {
             "title": "",
             "orient": "bottom",

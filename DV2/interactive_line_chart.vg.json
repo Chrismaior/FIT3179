@@ -81,7 +81,7 @@
         },
         "color": {
           "field": "Territory", "type": "nominal",
-          "scale": {"range": ["#facc15", "#22c55e"]},
+          "scale": {"range": ["#2CC0E6", "#f22121"]},
           "legend": {"title": "", "labelColor": "white", "orient": "top-right"}
         },
         "tooltip": [

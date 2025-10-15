@@ -98,7 +98,7 @@ body{
 }
 
 #homi_line_chart{
-  margin-left: 15px;
+  margin-left: -5px;
   width: 100px;
 }
 
@@ -138,19 +138,29 @@ body{
 /* widths (tweak to taste) */
 .viz-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
   background: transparent;
+  table-layout: fixed;
+  border-spacing: 0 0;
 }
 .viz-table td {
   border: 0;
   background: transparent;
   vertical-align: top;        /* align tops */
-  padding: 0 5px 10px 22px;
+  padding: 0 13px 10px 18px;
+  margin-right: 15px;
 }
 
 /* Column widths: chart 60%, text 40% */
-.viz-table .plot   { width: 60%; }
+.viz-table .plot   { width: 55%; }
 .viz-table .caption{ width: 40%; }
+
+.viz-cell-plot .caption-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two columns */
+  gap: 16px;
+  align-items: start;            /* or center if you prefer */
+}
 
 .vega-bindings select {
   font-size: 14px;
@@ -237,11 +247,21 @@ body{
   font-size: 15px;
 }
 
-
-
+#tree-small-caption{
+  margin-left: 22px;
+  font-size: medium;
+}
+#time-caption{
+  margin-top: -50px;
+}
 #treemap-caption{
   margin-left: 22px;
   margin-right: 33px;
+}
+
+#boxplot-caption{
+  margin-left: 50px;
+  margin-right: 60px;
 }
 
 .types-crime-caption{
@@ -260,6 +280,10 @@ body{
 .vert_section_break{
   margin-bottom: 18px;
 }
+.vert_section_break2{
+  margin-bottom: 30px;
+}
+
 
 .hori_section_break{
   margin-right: 18px;

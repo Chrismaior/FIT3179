@@ -101,13 +101,15 @@
     <section class="card map-card">
       <div class="card-header">
         <div>
-          <div class="card-title">Comparing the World’s Crime Landscape</div>
+          <div class="card-title">Worldwide Crime Rate Comparison</div>
         </div>
       </div>
       <div class="flourish-embed flourish-hierarchy" data-src="visualisation/25406602">
         <script src="https://public.flourish.studio/resources/embed.js"></script><noscript>
           <img src="https://public.flourish.studio/visualisation/25406602/thumbnail" width="100%" alt="hierarchy visualization" /></noscript></div>
-        <p id = "treemap-caption">This treemap represents the absolute total number of reported crimes by category over 20 years for each region around the world. 
+        <p id = "tree-small-caption"> <i>Click on continent label for more in depth regional view</i></p>
+        <div class = vert_section_break2></div>
+          <p id = "treemap-caption">This treemap represents the absolute total number of reported crimes by category over 20 years for each region around the world. 
         It reveals a clear imbalance in the <strong>types of crime that shape regional safety challenges </strong>. 
         In both Europe and the Americas, intentional homicide dominates the picture, 
         overshadowing other forms of crime such as sexual violence or theft. This suggests that 
@@ -115,7 +117,7 @@
         with lethal violence. In Asia, intentional homicide again stands out, but alongside smaller 
         shares of sexual exploitation and other offenses, hinting at broader social issues that 
         coexist with violent crime.</p>
-        <div class = "vert_section_break"></div>
+        <div class = "vert_section_break2"></div>
         <p id = "treemap-caption">Taken together, the treemap suggests that intentional homicide 
           is not just another category of crime, <strong>it is a recurring and defining challenge across 
           regions</strong>. Given the strong persistence of intentional homicide, we will look further into how that 
@@ -140,19 +142,58 @@
       </div>
       <h3 class="chart-subtitle">Victims of Intentional Homicide, 1990–2018</h3>
       
-      
-      <div id="homi_line_chart"></div>
+      <table class = "viz-table">
+        <tr>
+          <td class = "viz-cell-caption">
+            <div id="homi_line_chart"></div>
 
-      <div id="controls-top">
-        <span id="ctl-country"></span>
-        <span id="ctl-ma"></span>
-      </div>
-      <div id="controls-bottom">
-        <span id="ctl-compare"></span>
-        <span id="ctl-from"></span>
-        <span id="ctl-to"></span>
-      </div>
-      
+            <div id="controls-top">
+              <span id="ctl-country"></span>
+              <span id="ctl-ma"></span>
+            </div>
+            <div id="controls-bottom">
+              <span id="ctl-compare"></span>
+              <span id="ctl-from"></span>
+              <span id="ctl-to"></span>
+            </div>
+          </td>
+          <td class = "viz-cell-plot">
+
+            <div id = "time-caption"></div>
+            <div class = "caption-grid">
+              <div>
+                <p> The boxplot below shows how, crime rates fluctuate between 2019 and 2023, 
+              across the five continents. 
+              Africa showed low and fairly stable levels with mild peaks in 2020 and 2022, while the
+              Americas had the highest and most volatile rates, reflecting strong disparities across 
+              countries.  Asia and Europe displayed moderate peaks around 2020–2022 before declining in 
+              2023, suggesting gradual improvement. Oceania saw the sharpest drop, from high variability 
+              in 2019–2020 to minimal levels by 2023, hinting at effective interventions or post-pandemic 
+              recovery. Together, these observations highlight that progress in public safety is not 
+              linear but closely tied to how societies adapt to evolving challenges over time.
+              The trends highlight how governance and reform speed 
+              shape safety outcomes.</p>
+              </div>
+              <div> 
+                <p>Beyond the numerical shifts, these patterns reveal how crime is deeply intertwined with 
+                  broader social and economic transitions. Regions experiencing political stability and improved 
+                  governance tend to show sustained reductions in homicide, whereas nations facing inequality, 
+                  corruption, or weak institutions often struggle with volatility. Post-2020 changes further 
+                  reflect the global impacts of the pandemic, where disrupted economies, shifting law 
+                  enforcement priorities, and social stressors temporarily altered crime trajectories. Regional 
+                  differences show uneven progress, reflecting unique policy and social dynamics.
+                  Overall, the charts indicate a general global decline in crime rates after 2020, though 
+                  regional differences remain pronounced.</p>
+              </div>
+            </div>
+            
+          </td>
+        </tr>
+      </table>
+     
+
+
+
       <table class = "viz-table">
         <tr>
           <td class = "viz-cell-caption">

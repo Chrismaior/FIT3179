@@ -80,7 +80,11 @@
       "scale": { "zero": false },
       "axis": { "titleColor": "white", "labelColor": "white", "tickColor": "white" }
     },
-    "color": { "field": "YearLabel", "type": "nominal", "legend": null},
+    "color": { "field": "YearLabel", "type": "nominal", "legend": null, 
+              "scale":{
+                "domain": ["2019","2020","2021","2022","2023"],
+                "range": ["#9e0000", "#5e97ba", "#3052d9", "#f22121", "#0f87c2"]
+              }},
     "size": { "value": 60 },
     "tooltip": [
       { "field": "RegionLabel", "type": "nominal", "title": "Region" },
