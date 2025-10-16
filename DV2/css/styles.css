@@ -247,6 +247,10 @@ body{
   font-size: 15px;
 }
 
+#bar-caption{
+  margin-left: 22px;;
+}
+
 #tree-small-caption{
   margin-left: 22px;
   font-size: medium;
