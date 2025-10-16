@@ -59,7 +59,7 @@
         "range": ["#3052d9", "#5AA8F5", "#3CB9A1", "#0f87c2"]
       },
       "legend": {"orient": "bottom", "title": null, "labelColor": "white", "labelFontSize": 14,
-      "symbolSize": 150, "direction": "horizontal", "labelLimit": 300}
+      "symbolSize": 150, "direction": "horizontal", "labelLimit": 300, "offset": 60, "padding": -45}
     }
   },
 
