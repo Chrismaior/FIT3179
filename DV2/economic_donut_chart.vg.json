@@ -25,19 +25,24 @@
       "mark": {"type": "arc", "innerRadius": 110, "stroke": null},
       "encoding": {
         "theta": {"field": "Value", "type": "quantitative", "stack": true},
+        "order": {"field": "Region", "type": "nominal"},
         "color": {
           "field": "Region",
           "type": "nominal",
-          "scale": {"range": ["#9e0000", "#5e97ba", "#3052d9", "#f22121", "#0f87c2"]},
+          "scale": {
+            "domain": ["Europe","Africa","Americas","Asia","Oceania"],
+            "range": ["#9e0000", "#5e97ba", "#3052d9", "#f22121", "#0f87c2"]
+          },
           "legend": {
             "title": "",
             "orient": "bottom",
             "direction": "horizontal",
             "labelColor": "white",
-            "labelFontSize": 14,
+            "labelFontSize": 12,
             "symbolSize": 260,
             "offset": 60,
-            "padding": -30
+            "padding": -30,
+            "labelLimit": 400
           }
         },
         "tooltip": [
@@ -48,23 +53,23 @@
       }
     },
 
-
     {
+      "transform": [{"filter": "datum.Percent >= 0.01"}],
       "mark": {
         "type": "text",
+        "baseline": "middle",
         "fill": "white",
-        "fontSize": 16,
-        "radius": {"expr": "min(width, height)/2"},
-        "radiusOffset": 25,                          
+        "fontSize": 14,
         "stroke": "white",
         "strokeWidth": 0.25
       },
       "encoding": {
         "theta": {"field": "Value", "type": "quantitative", "stack": true},
+        "order": {"field": "Region", "type": "nominal"},
+        "radius": {"value": 165},
         "text": {"field": "PercentLabel"}
       }
     },
-
 
     {
       "mark": {
@@ -73,15 +78,15 @@
         "baseline": "middle",
         "fontSize": 16,
         "fill": "white",
-        "lineBreak": "\n"                            
+        "lineBreak": "\n"
       },
       "encoding": {
+        "theta": {"value": 0},
+        "radius": {"value": 0},
         "text": {"value": "Economic & Corruption\nRelated Crimes by Region,\n2023"}
       }
     }
   ],
 
-  "config": {
-    "view": {"stroke": null}
-  }
+  "config": {"view": {"stroke": null}}
 }

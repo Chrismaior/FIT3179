@@ -104,17 +104,17 @@ body{
 
 
 .chart-table{
-  margin-top: 18px;
-  width: 90%;
+  margin-top: 30px;
+  width: 100%;
   border-collapse: collapse;
   table-layout: fixed;           /* equal columns, prevents overflow jiggle */
 }
 
 .chart-table td{
-  width: 50%;                    /* two equal halves */
-  padding: 0 16px;               /* gap between charts */
+  padding: 5 16px 0 16px;               /* gap between charts */
   border: none;
   vertical-align: top;
+  margin-right: 20px;
 }
 
 /* Center the chart inside each cell and remove ad-hoc margins */
@@ -124,14 +124,17 @@ body{
 }
 #drug_donut{
   margin-left: 5px;
+  margin-top: 5px;
 }
 
 #economic_donut{
   margin-left: 1px;
+  width: 100%;
 }
 
 #violence_donut{
-  margin-left: 40px;
+  margin-left: 5px;
+
 }
 
 
