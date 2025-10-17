@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Average global resilience scores by indicator with grouped order and legible labels.",
+  "description": "Average global resilience scores by indicator with grouped order, legible labels, and annotations.",
   "width": 1570,
   "height": 500,
   "background": "transparent",
@@ -27,16 +27,23 @@
 
   "encoding": {
     "x": {
-      "field": "indicator", "type": "nominal", "title": null,
-      "sort": [
-        "International cooperation","National policies and laws",
-        "Political leadership and governance","Government transparency and accountability",
-        "Anti-money laundering","Economic regulatory capacity",
-        "Law enforcement","Territorial integrity","Judicial system and detention",
-        "Non-state actors","Prevention","Victim and witness support"
-      ],
-      "axis": {"labelFontSize": 12, "labelColor": "white", "labelAngle": -40, "labelPadding": 10, "labelBound":true,
-    "labelLimit":240}
+      "field": "indicator",
+      "type": "nominal",
+      "title": null,
+      "scale": {
+        "domain": [
+          "International cooperation","National policies and laws",
+          "Political leadership and governance","Government transparency and accountability",
+          "Anti-money laundering","Economic regulatory capacity",
+          "Law enforcement","Territorial integrity","Judicial system and detention",
+          "Non-state actors","Prevention","Victim and witness support"
+        ]
+      },
+      "axis": {
+        "labelFontSize": 12, "labelColor": "white",
+        "labelAngle": -40, "labelPadding": 10, "labelBound": true,
+        "labelLimit": 240
+      }
     },
     "y": {
       "field": "score", "type": "quantitative",
@@ -44,7 +51,8 @@
       "scale": {"domain": [0, 8]},
       "axis": {
         "grid": true, "gridColor": "#e8e8e8", "gridOpacity": 0.2,
-        "tickColor": "#bfbfbf", "labelColor": "white", "titleColor": "white", "labelFontSize": 12
+        "tickColor": "#bfbfbf", "labelColor": "white",
+        "titleColor": "white", "labelFontSize": 12
       }
     },
     "color": {
@@ -58,13 +66,15 @@
         ],
         "range": ["#3052d9", "#5AA8F5", "#3CB9A1", "#0f87c2"]
       },
-      "legend": {"orient": "bottom", "title": null, "labelColor": "white", "labelFontSize": 14,
-      "symbolSize": 150, "direction": "horizontal", "labelLimit": 300, "offset": 60, "padding": -45}
+      "legend": {
+        "orient": "bottom", "title": null, "labelColor": "white", "labelFontSize": 14,
+        "symbolSize": 150, "direction": "horizontal", "labelLimit": 300, "offset": 60, "padding": -45
+      }
     }
   },
 
   "transform": [
-    {"calculate": "datum.score - 0.25", "as": "score_inside"}  
+    {"calculate": "datum.score - 0.25", "as": "score_inside"}
   ],
 
   "layer": [
@@ -87,19 +97,105 @@
     },
 
     {
-      "mark": {
-        "type": "text",
-        "align": "center",
-        "baseline": "middle",
-        "fontSize": 17
-      },
+      "mark": {"type": "text", "align": "center", "baseline": "middle", "fontSize": 17},
       "encoding": {
         "x": {"field": "indicator"},
         "y": {"field": "score_inside"},
         "text": {"field": "score", "type": "quantitative", "format": ".2f"},
-        "color": {"value": "white"            
-        }
+        "color": {"value": "white"}
       }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "noteIndicator": "International cooperation",
+            "yStart": 5.87,
+            "yEnd": 7.3,
+            "note": "Highest score\nCross-border cooperation strengthened"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {"type": "rule", "stroke": "white", "strokeWidth": 1.5, "opacity": 0.3},
+          "encoding": {
+            "x": {"field": "noteIndicator", "type": "nominal", "scale": {
+              "domain": [
+                "International cooperation","National policies and laws",
+                "Political leadership and governance","Government transparency and accountability",
+                "Anti-money laundering","Economic regulatory capacity",
+                "Law enforcement","Territorial integrity","Judicial system and detention",
+                "Non-state actors","Prevention","Victim and witness support"
+              ]}},
+            "x2": {"field": "noteIndicator", "type": "nominal"},
+            "y": {"field": "yStart", "type": "quantitative"},
+            "y2": {"field": "yEnd", "type": "quantitative"}
+          }
+        },
+        {
+          "mark": {"type": "text", "fill": "white", "fontSize": 14, "align": "left", "baseline": "middle", "dx": 10, "lineBreak": "\n"},
+          "encoding": {
+            "x": {"field": "noteIndicator", "type": "nominal", "scale": {
+              "domain": [
+                "International cooperation","National policies and laws",
+                "Political leadership and governance","Government transparency and accountability",
+                "Anti-money laundering","Economic regulatory capacity",
+                "Law enforcement","Territorial integrity","Judicial system and detention",
+                "Non-state actors","Prevention","Victim and witness support"
+              ]}},
+            "y": {"field": "yEnd", "type": "quantitative"},
+            "text": {"field": "note"}
+          }
+        }
+      ]
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "noteIndicator": "Victim and witness support",
+            "yStart": 4.24,
+            "yEnd": 7,
+            "note": "Lowest indicator\nSupport systems remain limited"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {"type": "rule", "stroke": "white", "strokeWidth": 1.5, "opacity": 0.3},
+          "encoding": {
+            "x": {"field": "noteIndicator", "type": "nominal", "scale": {
+              "domain": [
+                "International cooperation","National policies and laws",
+                "Political leadership and governance","Government transparency and accountability",
+                "Anti-money laundering","Economic regulatory capacity",
+                "Law enforcement","Territorial integrity","Judicial system and detention",
+                "Non-state actors","Prevention","Victim and witness support"
+              ]}},
+            "x2": {"field": "noteIndicator", "type": "nominal"},
+            "y": {"field": "yStart", "type": "quantitative"},
+            "y2": {"field": "yEnd", "type": "quantitative"}
+          }
+        },
+        {
+          "mark": {"type": "text", "fill": "white", "fontSize": 14, "align": "right", "baseline": "middle", "dx": -10, "lineBreak": "\n"},
+          "encoding": {
+            "x": {"field": "noteIndicator", "type": "nominal", "scale": {
+              "domain": [
+                "International cooperation","National policies and laws",
+                "Political leadership and governance","Government transparency and accountability",
+                "Anti-money laundering","Economic regulatory capacity",
+                "Law enforcement","Territorial integrity","Judicial system and detention",
+                "Non-state actors","Prevention","Victim and witness support"
+              ]}},
+            "y": {"field": "yEnd", "type": "quantitative"},
+            "text": {"field": "note"}
+          }
+        }
+      ]
     }
   ],
 
